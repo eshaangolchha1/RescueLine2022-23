@@ -370,6 +370,7 @@ bool getout = false;
 int timecount = 0;
 
 void loop() {
+  //OBSTACLE STARTS HERE OBSTACLE STARTS HERE
   long duration, inches, cm, durationleftPing, durationrightPing, cmleftPing, cmrightPing;
   int y = 1;
   bool right;
@@ -455,7 +456,6 @@ void loop() {
         }
         int target = value + 180;
         int i = value;
-        bool seeWall = true;
         while (i < target) {
           rightmotor.run(100);
           leftmotor.run(100);
@@ -464,6 +464,27 @@ void loop() {
           //  Serial.print("i="); Serial.println(i);
         }
         //RUN ELLIPSE CODE
+         rightmotor.run(-36); 
+         leftmotor.run(118); 
+
+
+        delay(3850);
+
+        rightmotor.run(0); //-88
+          leftmotor.run(0); // 35
+          delay(3000);
+
+          double position22 = qtr.readLineBlack(sensorValues);
+          while (position22 > 4500 || position22 < 3500)
+          {
+            rightmotor.run(-50); 
+            leftmotor.run(50);
+            position22 = qtr.readLineBlack(sensorValues);
+
+          }
+          rightmotor.run(0); //-88
+          leftmotor.run(0); // 35
+          delay(3000);
 
       } else {
         /*int value = (int)euler.x();
@@ -484,7 +505,6 @@ void loop() {
           leftmotor.run(36); // 35
           imu::Vector<3> euler = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
           i = (int)euler.x();
-
         }
         */
           rightmotor.run(-118); //-88
